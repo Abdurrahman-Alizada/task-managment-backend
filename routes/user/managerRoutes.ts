@@ -1,7 +1,7 @@
 import express from 'express';
-import { createUser, deleteManager, getAllManagers, updateManager } from '../../controllers/user/managerController';
+import {  deleteManager, getAllManagers, updateManager } from '../../controllers/user/managerController';
 import { verifyToken } from '../../middleware/auth';
-import { isAdmin, isManagerOrAdmin } from '../../middleware/roleAuth';
+import { isAdmin } from '../../middleware/roleAuth';
 import { createManager } from '../../controllers/user/adminController';
 
 const router = express.Router();

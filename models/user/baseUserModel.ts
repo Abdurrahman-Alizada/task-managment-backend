@@ -14,7 +14,7 @@ const baseUserSchema = new Schema<BaseUserInterface>(
   {
     name: {
       type: String,
-      required: true,
+      // required: true,
     },
     email: {
       type: String,

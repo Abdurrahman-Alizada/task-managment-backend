@@ -89,6 +89,14 @@ export const deleteAdmin = async (req: CustomRequest, res: Response) => {
 export const createManager = async (req: CustomRequest, res: Response) => {
   try {
     const { name, password, email, department } = req.body;
+    
+    const existingUserInUserModel = await UserModel.findOne({ email });
+    const existingUserInManagerModel = await ManagerModel.findOne({ email });
+    const existingUserInAdminModel = await AdminModel.findOne({ email });
+
+    if (existingUserInUserModel || existingUserInManagerModel || existingUserInAdminModel) {
+      return res.status(400).json({ message: "User with this email already exists" });
+    }
 
     const manager = new ManagerModel({
       name,

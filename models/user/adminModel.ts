@@ -3,12 +3,12 @@ import mongoose, { Model, Schema } from "mongoose";
 
 interface AdminInterface extends BaseUserInterface {
   // role: string;
-  // permissions: string[];
+  permissions: string[];
 }
 
 const adminSchema = new Schema<AdminInterface>({
   // role: { type: String, required: true, default: "Admin" },
-  // permissions: { type: [String], default: [] },
+  permissions: { type: [String], default: [] },
 });
 
 adminSchema.add(baseUserSchema);

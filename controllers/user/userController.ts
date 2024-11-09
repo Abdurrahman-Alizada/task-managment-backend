@@ -27,11 +27,6 @@ export const createUser = async (req: CustomRequest, res: Response) => {
       return res.status(400).json({ message: "User with this email already exists" });
     }
 
-    // Validate password (e.g., minimum length requirement)
-    if (password.length < 6) {
-      return res.status(400).json({ message: "Password must be at least 6 characters long" });
-    }
-
     // Create the new user
     const user = new UserModel({
       name,
