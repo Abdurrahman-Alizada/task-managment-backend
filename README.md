@@ -1,4 +1,4 @@
-# Node.js Backend API
+# Task management Backend API
 
 A robust and scalable Node.js backend for Task management built with Express.js, featuring authentication, database integration, and self comprehensive API.
 
