@@ -62,6 +62,9 @@ export const getAllUsers = async (req: CustomRequest, res: Response) => {
 export const updateUser = async (req: CustomRequest, res: Response) => {
   try {
     const { id } = req.params;
+    if (req.body) {
+      delete req.body.password;
+    }
     const updateData = req.body;
     const user = await UserModel.findByIdAndUpdate(id, updateData, {
       new: true,

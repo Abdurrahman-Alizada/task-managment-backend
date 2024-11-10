@@ -1,6 +1,6 @@
 import express from 'express';
-import { verifyToken } from '../middleware/auth';
-import { isAdmin } from '../middleware/roleAuth';
+import { verifyToken } from '../utils/auth';
+import { isAdmin, isManagerOrAdmin } from '../middleware/roleAuth';
 import {
   createTask,
   deleteTask,
@@ -8,19 +8,22 @@ import {
   getTaskById,
   updateTask,
   addAssignedUser,
-  removeAssignedUser
+  removeAssignedUser,
+  getUserTasks
 } from '../controllers/taskController';
 
 const router = express.Router();
 
 // Create a new task (Admin only)
-router.post('/create', verifyToken, isAdmin, createTask);
+router.post('/create', verifyToken, createTask);
 
 // Get all tasks (Admin only)
-router.get('/getAll', verifyToken, isAdmin, getAllTasks);
+router.get('/getAll', verifyToken, isManagerOrAdmin, getAllTasks);
 
 // Get a task by ID
 router.get('/getTaskById/:id', verifyToken, getTaskById);
+
+router.get('/getUserTasks', verifyToken, getUserTasks);
 
 // Update a task
 router.put('/updateTask/:id', verifyToken, updateTask);

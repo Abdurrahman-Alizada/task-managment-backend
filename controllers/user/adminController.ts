@@ -60,6 +60,9 @@ export const getAllAdmins = async (req: CustomRequest, res: Response) => {
 export const updateAdmin = async (req: CustomRequest, res: Response) => {
   try {
     const { id } = req.params;
+    if (req.body) {
+      delete req.body.password;
+    }
     const updateData = req.body;
     const admin = await AdminModel.findByIdAndUpdate(id, updateData, {
       new: true,
@@ -89,13 +92,19 @@ export const deleteAdmin = async (req: CustomRequest, res: Response) => {
 export const createManager = async (req: CustomRequest, res: Response) => {
   try {
     const { name, password, email, department } = req.body;
-    
+
     const existingUserInUserModel = await UserModel.findOne({ email });
     const existingUserInManagerModel = await ManagerModel.findOne({ email });
     const existingUserInAdminModel = await AdminModel.findOne({ email });
 
-    if (existingUserInUserModel || existingUserInManagerModel || existingUserInAdminModel) {
-      return res.status(400).json({ message: "User with this email already exists" });
+    if (
+      existingUserInUserModel ||
+      existingUserInManagerModel ||
+      existingUserInAdminModel
+    ) {
+      return res
+        .status(400)
+        .json({ message: "User with this email already exists" });
     }
 
     const manager = new ManagerModel({
@@ -119,6 +128,7 @@ export const createManager = async (req: CustomRequest, res: Response) => {
       // }
     });
   } catch (error) {
-    res.status(500).json({ message: "Error creating manager" });
+    console.log("first", error);
+    res.status(500).json({ message: "Error creating manager", error });
   }
 };

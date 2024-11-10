@@ -1,6 +1,6 @@
 import express from 'express';
 import {  deleteManager, getAllManagers, updateManager } from '../../controllers/user/managerController';
-import { verifyToken } from '../../middleware/auth';
+import { verifyToken } from '../../utils/auth';
 import { isAdmin } from '../../middleware/roleAuth';
 import { createManager } from '../../controllers/user/adminController';
 

@@ -48,8 +48,11 @@ export const getAllManagers = async (req: CustomRequest, res: Response) => {
 export const updateManager = async (req: CustomRequest, res: Response) => {
   try {
     const { id } = req.params;
+    if (req.body) {
+      delete req.body.password;
+    }
     const updateData = req.body;
-    const manager = await ManagerModel.findByIdAndUpdate(id, updateData, { new: true });
+    const manager = await ManagerModel.findByIdAndUpdate(id, updateData);
 
     if (!manager) {
       return res.status(404).json({ message: 'Manager not found' });

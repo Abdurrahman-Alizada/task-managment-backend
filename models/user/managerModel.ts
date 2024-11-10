@@ -7,7 +7,7 @@ interface ManagerInterface extends BaseUserInterface {
 }
 
 const managerSchema = new Schema<ManagerInterface>({
-  department: { type: String, required: true },
+  department: { type: String, },
   teamSize: { type: Number, default: 0 },
 });
 
